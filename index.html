@@ -80,7 +80,7 @@ async function init() {
               '<br>Avg. NBA FG percentage: ' + avg_nba_fg + 
               '<br>Avg. NBA FT percentage: ' + avg_nba_ft);
 
-    const svgWidth = 1500;
+    const svgWidth = 2000;
     const svgHeight = 750;
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
     const chartWidth = svgWidth - margin.left - margin.right;
@@ -110,7 +110,25 @@ async function init() {
         .attr("transform", "translate(50, 0)")
         .call(yAxis);
 
-    svg.selectAll(".bar")
+    svg.selectAll(".group")
+        .data(filteredData)
+        .enter()
+        .append("g")
+        .attr("class", "group")
+        .attr("transform", d => "translate(${xScale(d.name)}, 0)")
+        .selectAll(".bar")
+        .data(d => [d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%'], d['NBA_ft%']])
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", (d, i) => i * (xScale.bandwidth() / 3))
+        .attr("y", d => yScale(d))
+        .attr("width", xScale.bandwidth() / 3)
+        .attr("height", d => chartHeight + margin.top - yScale(d))
+        .attr("fill", (d, i) => ["steelblue", "orange", "green", "red"][i]);
+    
+
+    /*svg.selectAll(".bar")
         .data(filteredData)
         .enter()
         .append("rect")
@@ -120,6 +138,7 @@ async function init() {
         .attr("width", xScale.bandwidth())
         .attr("height", d => chartHeight - yScale(d.NBA__3ptpct))
         .attr("fill", "steelblue");
+        */
 
 }
 
