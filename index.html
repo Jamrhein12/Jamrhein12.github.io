@@ -117,15 +117,15 @@ async function init() {
         .attr("class", "group")
         .attr("transform", d => `translate(${xScale(d.name)}, 0)`)
         .selectAll(".bar")
-        .data(d => [d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%'], d['NBA_ft%']])
+        .data(d => [d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%']])
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", (d, i) => i * (xScale.bandwidth() / 4))
+        .attr("x", (d, i) => i * (xScale.bandwidth() / 3))
         .attr("y", d => yScale(d))
-        .attr("width", xScale.bandwidth() / 4)
+        .attr("width", xScale.bandwidth() / 3)
         .attr("height", d => chartHeight + margin.top - yScale(d))
-        .attr("fill", (d, i) => ["steelblue", "orange", "green", "red"][i]);
+        .attr("fill", (d, i) => ["steelblue", "orange", "green"][i]);
     
 
     /*svg.selectAll(".bar")
