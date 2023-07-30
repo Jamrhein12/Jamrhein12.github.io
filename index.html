@@ -1,6 +1,5 @@
 <html>
 <script src='https://cdn.jsdelivr.net/npm/d3@7'></script>
-<style> rect {fill: lightblue; stroke: black; }</style>
 <body onload='init()'>
 
 <h1>NBA vs. NCAA Shooting Percentages Data</h1>
@@ -12,13 +11,15 @@
     or after the year 2000, and averaged 20 points per game or more in their NBA career.
 </p>
 
-<p>Average data for both the NBA and NCAA were taken from data from NBA players who played in the year 2018
-    (the most recent year of the data) and their respective NBA and NCAA statistics.
+<p>Average data for the NBA was taken from data from NBA players who played in the year 2018
+    (the most recent year of the data) and have played atleast 100 career games.
 </p>
 
 <div id="datacontainer"></div>
 
 <div id="averages"></div>
+
+<svg id="chart1" width="800" height="400"></svg>
 
 <script>
 
@@ -53,16 +54,17 @@ async function init() {
     console.log(avg_nba_fg);
     const avg_nba_ft = parseFloat(d3.mean(filteredAvgData, d => +d['NBA_ft%']).toFixed(2));
     console.log(avg_nba_ft);
+    /*
     // NCAA averages
     const avg_ncaa_3ptpct = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA__3ptpct']).toFixed(2));
     console.log(avg_ncaa_3ptpct);
     const avg_ncaa_efgpct = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA_efgpct']).toFixed(2));
-    console.log(avg_ncaa_3ptpct);
+    console.log(avg_ncaa_efgpct);
     const avg_ncaa_fg = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA_fgpct']).toFixed(2));
-    console.log(avg_ncaa_3ptpct);
+    console.log(avg_ncaa_fg);
     const avg_ncaa_ft = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA_ft']).toFixed(2));
-    console.log(avg_ncaa_3ptpct);
-
+    console.log(avg_ncaa_ft);
+    */
 
     d3.select('#datacontainer')
         .selectAll('p')
@@ -76,11 +78,48 @@ async function init() {
         .html('Avg. NBA 3pt percentage: ' + avg_nba_3ptpct +
               '<br>Avg. NBA EFG pct: ' + avg_nba_efgpct +
               '<br>Avg. NBA FG percentage: ' + avg_nba_fg + 
-              '<br>Avg. NBA FT percentage: ' + avg_nba_ft +
-              '<br>Avg. NCAA 3pt percentage: ' + avg_ncaa_3ptpct +
-              '<br>Avg. NCAA EFG pct: ' + avg_ncaa_efgpct +
-              '<br>Avg. NCAA FG percentage: ' + avg_ncaa_fg +
-              '<br>Avg. NCAA FT percentage: ' + avg_ncaa_ft);
+              '<br>Avg. NBA FT percentage: ' + avg_nba_ft);
+
+    const svgWidth = 800;
+    const svgHeight = 400;
+    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+    const chartWidth = svgWidth - margin.left - margin.right;
+    const chartHeight = svgHeight - magin.top - margin.bottom;
+
+    const svg = d3.select('#chart1')
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+
+    const xScale = d3.scaleBand()
+        .domain(data.map(d => d.name))
+        .range([margin.left, chartWidth + margin.left])
+        .padding(0.1);
+
+    const yScale = d3.scaleLinear()
+    .domain([0, d3.max(filteredData, d => d.NBA__3ptpct)])
+    .range([chartHeight + margin.top, margin.top]);
+
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
+
+    svg.append("g")
+        .attr("transform", 'translate(0, ${chartHeight + margin.top})')
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("transform", 'translate(0, ${margin.left}, 0)')
+        .call(yAxis);
+
+    svg.selectAll(".bar")
+        .data(filteredData)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", d => xScale(d.name))
+        .attr("y", d => yScale(d.NBA__3ptpct))
+        .attr("width", xScale.bandWidth())
+        .attr("height", d => chartHeight - yScale(d.NBA__3ptpct))
+        .attr("fill", "steelblue");
 
 }
 
