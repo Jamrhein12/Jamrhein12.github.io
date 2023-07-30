@@ -71,6 +71,7 @@ async function init() {
 
     d3.select('#averages')
         .selectAll('p')
+        .data(filteredData)
         .enter()
         .append('p')
         .html('Avg. NBA 3pt attempts per game: ' + avg_nba_3ptapg +
