@@ -106,8 +106,13 @@ async function init() {
     const yAxis = d3.axisLeft(yScale);
 
     svg.append("g")
-        .attr("transform", "translate(100, 1400)")
-        .call(xAxis);
+        .attr("transform", "translate(0, 1400)")
+        .call(xAxis)
+        .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-45)");
 
     svg.append("g")
         .attr("transform", "translate(50, 0)")
