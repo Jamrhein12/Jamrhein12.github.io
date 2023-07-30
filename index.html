@@ -19,7 +19,24 @@
 
 <div id="averages"></div>
 
+<h1>NBA Shooting Percentages</h1>
+
+<p>Blue = 3 pt percentage
+    <br>Yellow = EFG percentage
+    <br>Green = FG percentage
+</p>
+
 <svg id="chart1" width="2000" height="750"></svg>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h1>NCAA Shooting Percentages</h1>
+
+<svg id="chart2" width="2000" height="750"></svg>
 
 <script>
 
@@ -45,6 +62,7 @@ async function init() {
     console.log(filteredData);
 
     // Getting league averages
+
     // NBA averages
     const avg_nba_3ptpct = parseFloat(d3.mean(filteredAvgData, d => +d['NBA__3ptpct']).toFixed(2));
     console.log(avg_nba_3ptpct);
@@ -52,39 +70,33 @@ async function init() {
     console.log(avg_nba_efgpct);
     const avg_nba_fg = parseFloat(d3.mean(filteredAvgData, d => +d['NBA_fg%']).toFixed(2));
     console.log(avg_nba_fg);
-    const avg_nba_ft = parseFloat(d3.mean(filteredAvgData, d => +d['NBA_ft%']).toFixed(2));
-    console.log(avg_nba_ft);
-    /*
-    // NCAA averages
-    const avg_ncaa_3ptpct = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA__3ptpct']).toFixed(2));
-    console.log(avg_ncaa_3ptpct);
-    const avg_ncaa_efgpct = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA_efgpct']).toFixed(2));
-    console.log(avg_ncaa_efgpct);
-    const avg_ncaa_fg = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA_fgpct']).toFixed(2));
-    console.log(avg_ncaa_fg);
-    const avg_ncaa_ft = parseFloat(d3.mean(filteredAvgData, d => +d['NCAA_ft']).toFixed(2));
-    console.log(avg_ncaa_ft);
-    */
 
+    /*
     d3.select('#datacontainer')
         .selectAll('p')
         .data(filteredData)
         .enter()
         .append('p')
         .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Name: ' + d.name + ' Career PPG: ' + d.NBA_ppg; });
-
+    */
     d3.select('#averages')
         .append('p')
         .html('Avg. NBA 3pt percentage: ' + avg_nba_3ptpct +
               '<br>Avg. NBA EFG pct: ' + avg_nba_efgpct +
-              '<br>Avg. NBA FG percentage: ' + avg_nba_fg + 
-              '<br>Avg. NBA FT percentage: ' + avg_nba_ft);
+              '<br>Avg. NBA FG percentage: ' + avg_nba_fg +
+              '<br><br><br>');
+
+// Global chart dimensions
 
     const svgWidth = 2000;
     const svgHeight = 750;
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
+
+//////////////////////////////////////////////
+// NBA chart
+//////////////////////////////////////////////
 
     const svg = d3.select('#chart1')
         .attr("width", svgWidth)
@@ -126,19 +138,51 @@ async function init() {
         .attr("width", xScale.bandwidth() / 3)
         .attr("height", d => chartHeight + margin.top - yScale(d))
         .attr("fill", (d, i) => ["steelblue", "orange", "green"][i]);
-    
 
-    /*svg.selectAll(".bar")
+/////////////////////////////////////////////
+// NCAA chart
+/////////////////////////////////////////////
+
+    const svg1 = d3.select('#chart2')
+        .attr("width", svgWidth)
+        .attr("height", svgHeight);
+
+    const xScale1 = d3.scaleBand()
+        .domain(filteredData.map(d => d.name))
+        .range([margin.left, chartWidth + margin.left])
+        .padding(0.1);
+
+    const yScale1 = d3.scaleLinear()
+    .domain([0, d3.max(filteredData, d => Math.max(d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%']))])
+    .range([chartHeight, 0]);
+
+    const xAxis1 = d3.axisBottom(xScale1);
+    const yAxis1 = d3.axisLeft(yScale1);
+
+    svg1.append("g")
+        .attr("transform", "translate(0, 700)")
+        .call(xAxis);
+
+    svg1.append("g")
+        .attr("transform", "translate(50, 0)")
+        .call(yAxis);
+
+    svg1.selectAll(".group")
         .data(filteredData)
+        .enter()
+        .append("g")
+        .attr("class", "group")
+        .attr("transform", d => `translate(${xScale1(d.name)}, 0)`)
+        .selectAll(".bar")
+        .data(d => [d['NCAA__3ptpct'], d['NCAA_efgpct'], d['NCAA_fgpct']])
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", d => xScale(d.name))
-        .attr("y", d => yScale(d.NBA__3ptpct))
-        .attr("width", xScale.bandwidth())
-        .attr("height", d => chartHeight - yScale(d.NBA__3ptpct))
-        .attr("fill", "steelblue");
-        */
+        .attr("x", (d, i) => i * (xScale1.bandwidth() / 3))
+        .attr("y", d => yScale1(d))
+        .attr("width", xScale1.bandwidth() / 3)
+        .attr("height", d => chartHeight + margin.top - yScale1(d))
+        .attr("fill", (d, i) => ["steelblue", "orange", "green"][i]);
 
 }
 
