@@ -14,6 +14,10 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
+    data.forEach(d => {
+        d.nba_ppg = parseFloat(d.nba_ppg);
+    });
+
     // Filter data to...
     // 1. Player played college basketball
     // 2. Player started career in or after 2000
@@ -46,8 +50,7 @@ async function init() {
         .data(filteredData)
         .enter()
         .append('p')
-        .text(d => 'Name: ${d.name}, Career PPG: ${d.nba_ppg}');
-        //.html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg; });
+        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg; });
 
 }
 
