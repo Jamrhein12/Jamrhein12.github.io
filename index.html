@@ -137,7 +137,7 @@ async function init() {
         console.log("nba_button clicked");
         header.textContent = "NBA Shooting Percentages";
 
-        const groups_nba = svg.SelectAll(".group")
+        const groups_nba = svg.selectAll(".group")
             .data(filteredData, d => d.name);
 
         groups_nba.attr("transform", d => `translate(${xScale(d.name)}, 0)`);
@@ -157,7 +157,7 @@ async function init() {
         console.log("ncaa_button clicked");
         header.textContent = "NCAA Shooting Percentages";
 
-        const groups_ncaa = svg.SelectAll(".group")
+        const groups_ncaa = svg.selectAll(".group")
             .data(filteredData, d => d.name);
 
         groups_ncaa.attr("transform", d => `translate(${xScale(d.name)}, 0)`);
