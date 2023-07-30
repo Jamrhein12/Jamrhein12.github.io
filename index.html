@@ -8,7 +8,13 @@
 <p>Below are charts showing shooting percentage data of players in the NBA (National Basketball Association)
     and their respective shooting percentage data of when they played college basketball (NCAA)</p>
 
+<p>These specific players were selected because they all played college basketball, started their career in
+    or after the year 2000, and averaged 20 points per game or more in their NBA career.
+</p>
+
 <div id="datacontainer"></div>
+
+<div id="averages"></div>
 
 <script>
 
@@ -29,27 +35,44 @@ async function init() {
     console.log(filteredData);
 
     // Setting percentage data to numbers and getting averages
-    /*
-    const avg_nba_3ptapg = d3.mean(filteredData, d => +nba_3ptapg);
-    const avg_nba_3ptpct = d3.mean(filteredData, d => +nba_3ptpct);
-    const avg_nba_3ptpg = d3.mean(filteredData, d => +nba_3ptpg);
-    const avg_nba_efgpct = d3.mean(filteredData, d => +nba_efgpct);
-    const avg_nba_fg = d3.mean(filteredData, d => +nba_fg);
-    const avg_nba_fg_per_game = d3.mean(filteredData, d => +nba_fg_per_game);
-    const avg_nba_fga_per_game = d3.mean(filteredData, d => +nba_fga_per_game);
-    const avg_nba_ft = d3.mean(filteredData, d => +nba_ft);
-    const avg_nba_ft_per_g = d3.mean(filteredData, d => +nba_ft_per_g);
-    const avg_nba_fta_p_g = d3.mean(filteredData, d => +nba_fta_p_g);
-    const avg_nba_g_played = d3.mean(filteredData, d => +nba_g_played);
-    const avg_nba_ppg = d3.mean(filteredData, d => +nba_ppg);
-*/
+    
+    const avg_nba_3ptapg = d3.mean(filteredData, d => +d['NBA_3ptapg']);
+    const avg_nba_3ptpct = d3.mean(filteredData, d => +d['NBA_3ptpct']);
+    const avg_nba_3ptpg = d3.mean(filteredData, d => +d['NBA_3ptpg']);
+    const avg_nba_efgpct = d3.mean(filteredData, d => +d['NBA_efgpct']);
+    const avg_nba_fg = d3.mean(filteredData, d => +d['NBA_fg%']);
+    const avg_nba_fg_per_game = d3.mean(filteredData, d => +d['NBA_fg_per_game']);
+    const avg_nba_fga_per_game = d3.mean(filteredData, d => +d['NBA_fga_per_game']);
+    const avg_nba_ft = d3.mean(filteredData, d => +d['NBA_ft%']);
+    const avg_nba_ft_per_g = d3.mean(filteredData, d => +d['NBA_ft_per_g']);
+    const avg_nba_fta_p_g = d3.mean(filteredData, d => +d['NBA_fta_p_g']);
+    const avg_nba_g_played = d3.mean(filteredData, d => +d['NBA_g_played']);
+    const avg_nba_ppg = d3.mean(filteredData, d => +d['NBA_ppg']);
+
 
     d3.select('#datacontainer')
         .selectAll('p')
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.NBA_ppg; });
+        .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Player Name: ' + d.name + ' Career PPG: ' + d.NBA_ppg; });
+
+    d3.select('#averages')
+        .selectAll('p')
+        .enter()
+        .append('p')
+        .html('Avg. NBA 3pt attempts per game: ' + avg_nba_3ptapg +
+              '<br>Avg. NBA 3pt percentage: ' + avg_nba_3ptpct +
+              '<br>Avg. NBA 3pt per game: ' + avg_nba_3ptpg +
+              '<br>Avg. NBA EFG pct: ' + avg_nba_efgpct +
+              '<br>Avg. NBA FG percentage: ' + avg_nba_fg + 
+              '<br>Avg. NBA FG per game: ' + avg_nba_fg_per_game +
+              '<br>Avg. NBA FGA per game: ' + avg_nba_fga_per_game +
+              '<br>Avg. NBA FT percentage: ' + avg_nba_ft +
+              '<br>Avg. NBA FT per game: ' + avg_nba_ft_per_g +
+              '<br>Avg. NBA FTA per game: ' + avg_nba_fta_p_g +
+              '<br>Avg. NBA Games Played: ' + avg_nba_g_played +
+              '<br>Avg. NBA PPG: ' + avg_nba_ppg)
 
 }
 
