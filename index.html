@@ -14,14 +14,14 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
-    const namesToFilter = ["Stephen Curry",
+    const namesToFilter = ["Seth Curry",
                            "LeBron James",
                            "James Harden",
                            "Kyrie Irving",
                            "Anthony Davis"
                           ];
 
-    const filteredData = data.filter(row => namesToFilter.some(name => name.trim().toLowerCase() === row.name.trim().toLowerCase()));
+    const filteredData = data.filter(row => namesToFilter.includes(row.name));
 
     d3.select('body')
         .selectAll('p')
