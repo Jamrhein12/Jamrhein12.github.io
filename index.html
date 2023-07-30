@@ -43,7 +43,7 @@ async function init() {
     console.log(avg_nba_3ptpg);
     const avg_nba_efgpct = parseFloat(d3.mean(filteredData, d => +d['NBA_efgpct']).toFixed(2));
     console.log(avg_nba_efgpct);
-    const avg_nba_fg = parseFloat(d3.mean(filteredData, d => +d['NBA_fg%'].toFixed(2)));
+    const avg_nba_fg = parseFloat(d3.mean(filteredData, d => +d['NBA_fg%']).toFixed(2));
     console.log(avg_nba_fg);
     const avg_nba_fg_per_game = parseFloat(d3.mean(filteredData, d => +d['NBA_fg_per_game']).toFixed(2));
     console.log(avg_nba_fg_per_game);
