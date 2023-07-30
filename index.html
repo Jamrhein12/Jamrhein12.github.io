@@ -22,9 +22,10 @@ async function init() {
         row.active_from >= 2000 && 
         row.college !== null && 
         row.college !== "" &&
-        row.nba_ppg >= 20.0);
+        +row.nba_ppg >= 20.0);
 
     // Setting percentage data to numbers and getting averages
+    /*
     const avg_nba_3ptapg = d3.mean(filteredData, d => +nba_3ptapg);
     const avg_nba_3ptpct = d3.mean(filteredData, d => +nba_3ptpct);
     const avg_nba_3ptpg = d3.mean(filteredData, d => +nba_3ptpg);
@@ -37,7 +38,7 @@ async function init() {
     const avg_nba_fta_p_g = d3.mean(filteredData, d => +nba_fta_p_g);
     const avg_nba_g_played = d3.mean(filteredData, d => +nba_g_played);
     const avg_nba_ppg = d3.mean(filteredData, d => +nba_ppg);
-
+*/
 
     d3.select('body')
         .selectAll('p')
