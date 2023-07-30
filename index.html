@@ -47,7 +47,7 @@ async function init() {
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.NBA_ppg; });
+        .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.NBA_ppg; });
 
 }
 
