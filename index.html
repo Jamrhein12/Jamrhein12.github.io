@@ -15,7 +15,7 @@ async function init() {
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
     data.forEach(d => {
-        d.nba_ppg = parseFloat(d.nba_ppg);
+        d.nba_ppg = +d.nba_ppg;
     });
 
     // Filter data to...
