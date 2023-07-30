@@ -19,7 +19,7 @@
 
 <div id="averages"></div>
 
-<svg id="chart1" width="1500" height="750" fill="lightblue"></svg>
+<svg id="chart1" width="1500" height="750" fill="lightgray"></svg>
 
 <script>
 
@@ -103,10 +103,8 @@ async function init() {
     const yAxis = d3.axisLeft(yScale);
 
     svg.append("g")
-        .attr("transform", "translate(0, 1400)")
-        .call(xAxis)
-        .selectAll("text")
-        .style("font-size", "5px");
+        .attr("transform", "translate(0, 700)")
+        .call(xAxis);
 
     svg.append("g")
         .attr("transform", "translate(50, 0)")
