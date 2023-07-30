@@ -14,14 +14,18 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
-}
+    <p>test</p>
 
-d3.select('body')
+    d3.select('body')
         .selectAll('p')
         .data(data)
         .enter()
         .append('p')
         .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college; });
+
+}
+
+
 
 /*
 var data = [4,8,15,16,23,42];
