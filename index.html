@@ -19,24 +19,15 @@
 
 <div id="averages"></div>
 
-<h1>NBA Shooting Percentages</h1>
+<h1 id="header">NBA Shooting Percentages</h1>
 
-<p>Blue = 3 pt percentage
-    <br>Yellow = EFG percentage
-    <br>Green = FG percentage
-</p>
+<button id="NBA_button">NBA shooting percentages</button>
+<button id="NCAA_button">NCAA shooting percentages</button>
+<button id="both_button">NBA/NCAA shooting percentages</button>
+
+<p>Blue = 3 pt percentage<br>Green = FG percentage</p>
 
 <svg id="chart1" width="2000" height="750"></svg>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<h1>NCAA Shooting Percentages</h1>
-
-<svg id="chart2" width="2000" height="750"></svg>
 
 <script>
 
@@ -66,8 +57,6 @@ async function init() {
     // NBA averages
     const avg_nba_3ptpct = parseFloat(d3.mean(filteredAvgData, d => +d['NBA__3ptpct']).toFixed(2));
     console.log(avg_nba_3ptpct);
-    const avg_nba_efgpct = parseFloat(d3.mean(filteredAvgData, d => +d['NBA_efgpct']).toFixed(2));
-    console.log(avg_nba_efgpct);
     const avg_nba_fg = parseFloat(d3.mean(filteredAvgData, d => +d['NBA_fg%']).toFixed(2));
     console.log(avg_nba_fg);
 
@@ -82,7 +71,6 @@ async function init() {
     d3.select('#averages')
         .append('p')
         .html('Avg. NBA 3pt percentage: ' + avg_nba_3ptpct +
-              '<br>Avg. NBA EFG pct: ' + avg_nba_efgpct +
               '<br>Avg. NBA FG percentage: ' + avg_nba_fg +
               '<br><br><br>');
 
@@ -129,43 +117,36 @@ async function init() {
         .attr("class", "group")
         .attr("transform", d => `translate(${xScale(d.name)}, 0)`)
         .selectAll(".bar")
-        .data(d => [d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%']])
+        .data(d => [d['NBA__3ptpct'], d['NBA_fg%']])
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("x", (d, i) => i * (xScale.bandwidth() / 3))
+        .attr("x", (d, i) => i * (xScale.bandwidth() / 2))
         .attr("y", d => yScale(d))
-        .attr("width", xScale.bandwidth() / 3)
+        .attr("width", xScale.bandwidth() / 2)
         .attr("height", d => chartHeight + margin.top - yScale(d))
-        .attr("fill", (d, i) => ["steelblue", "orange", "green"][i]);
+        .attr("fill", (d, i) => ["steelblue", "orange"][i]);
+
+    const nba_button = document.getElementById("NBA_button");
+    const ncaa_button = document.getElementById("NCAA_button");
+    const both_button = document.getElementById("both_button");
+
+    nba_button.addEventListener("click", function() {
+        console.log("nba_button clicked");
+    });
+
+    ncaa_button.addEventListener("click", function() {
+        console.log("ncaa_button clicked");
+    });
+
+    both_button.addEventListener("click", function() {
+        console.log("both_button clicked");
+    })
+
 
 /////////////////////////////////////////////
 // NCAA chart
 /////////////////////////////////////////////
-
-    const svg1 = d3.select('#chart2')
-        .attr("width", svgWidth)
-        .attr("height", svgHeight);
-
-    const xScale1 = d3.scaleBand()
-        .domain(filteredData.map(d => d.name))
-        .range([margin.left, chartWidth + margin.left])
-        .padding(0.1);
-
-    const yScale1 = d3.scaleLinear()
-    .domain([0, d3.max(filteredData, d => Math.max(d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%']))])
-    .range([chartHeight, 0]);
-
-    const xAxis1 = d3.axisBottom(xScale1);
-    const yAxis1 = d3.axisLeft(yScale1);
-
-    svg1.append("g")
-        .attr("transform", "translate(0, 700)")
-        .call(xAxis);
-
-    svg1.append("g")
-        .attr("transform", "translate(50, 0)")
-        .call(yAxis);
 
     svg1.selectAll(".group")
         .data(filteredData)
