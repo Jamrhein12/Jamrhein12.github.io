@@ -25,33 +25,33 @@
 
 <p>Blue = 3pt percentage<br>Orange = FG percentage</p>
 
-<svg id="chart1" width="1000" height="400"></svg>
+<svg id="chart1" width="1500" height="400"></svg>
 
 <br><br><br><br><br><br><br><br><br><br>
 
 <h1 id="ncaa_header">NCAA Shooting Percentages</h1>
 
 <button id="ncaa_to_nba_button">NBA Shooting Percentages</button>
-<br>
+<br><br>
 <button id="ncaa_to_both_button">NBA/NCAA Shooting Percentages</button>
 
 <p>Green = 3pt percentage<br>Black = FG percentage</p>
 
-<svg id="chart2" width="1000" height="400"></svg>
+<svg id="chart2" width="1500" height="400"></svg>
 
 <br><br><br><br><br><br><br><br><br><br>
 
 <h1 id="both_header">NBA/NCAA Shooting Percentages</h1>
 
 <button id="both_to_nba_button">NBA Shooting Percentages</button>
-<br>
+<br><br>
 <button id="both_to_ncaa_button">NCAA Shooting Percentages</button>
 
 <p>Blue = 3pt percentage (NBA)<br>Green = 3pt percentage (NCAA)
 <br>Orange = FG percentage (NBA)<br>Black = FG percentage (NCAA)
 </p>
 
-<svg id="chart3" width="1000" height="400"></svg>
+<svg id="chart3" width="1500" height="400"></svg>
 
 <script>
 
@@ -73,9 +73,9 @@ async function init() {
 
 // Global chart dimensions
 
-    const svgWidth = 1000;
+    const svgWidth = 1500;
     const svgHeight = 400;
-    const margin = { top: 50, right: 25, bottom: 50, left: 25 };
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
 
@@ -100,11 +100,11 @@ async function init() {
     const yAxis1 = d3.axisLeft(yScale1);
 
     svg1.append("g")
-        .attr("transform", "translate(0, 375)")
+        .attr("transform", "translate(0, 350)")
         .call(xAxis1);
 
     svg1.append("g")
-        .attr("transform", "translate(25, 0)")
+        .attr("transform", "translate(50, 0)")
         .call(yAxis1);
 
     svg1.selectAll(".group")
@@ -146,11 +146,11 @@ async function init() {
     const yAxis2 = d3.axisLeft(yScale2);
 
     svg2.append("g")
-        .attr("transform", "translate(0, 375)")
+        .attr("transform", "translate(0, 350)")
         .call(xAxis2);
 
     svg2.append("g")
-        .attr("transform", "translate(25, 0)")
+        .attr("transform", "translate(50, 0)")
         .call(yAxis2);
 
     svg2.selectAll(".group")
@@ -191,11 +191,11 @@ async function init() {
     const yAxis3 = d3.axisLeft(yScale3);
 
     svg3.append("g")
-        .attr("transform", "translate(0, 375)")
+        .attr("transform", "translate(0, 350)")
         .call(xAxis3);
 
     svg3.append("g")
-        .attr("transform", "translate(25, 0)")
+        .attr("transform", "translate(50, 0)")
         .call(yAxis3);
 
     svg3.selectAll(".group")
