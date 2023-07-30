@@ -1,1 +1,36 @@
-"Hello World" 
+<html>
+<script src='https://cdn.jsdelivr.net/npm/d3@7'></script>
+<style> rect {fill: lightblue; stroke: black; }</style>
+<body>
+<svg width=300 height=300>
+</svg>
+<script>
+var data = [4,8,15,16,23,42];
+
+var xs = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,200]);
+var ys = d3.scaleLinear().domain([0,42]).range([200,0]);
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate(50,50)")
+.selectAll("rect")
+.data(data)
+.enter().append("rect")
+.attr("x", function(d, i) {return xs(i)})
+.attr("y", function(d) {return ys(d)})
+.attr("width", xs.bandwidth)
+.attr("height", function(d, i) {return 200 - ys(d)});
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate(50,50)")
+.call(d3.axisLeft(ys));
+
+d3.select("svg")
+.append("g")
+.attr("transform","translate(50,250)")
+.call(d3.axisBottom(xs));
+
+</script>
+</body>
+</html>
