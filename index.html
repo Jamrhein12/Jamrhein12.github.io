@@ -22,7 +22,7 @@ async function init() {
         row.active_from >= 2000 && 
         row.college !== null && 
         row.college !== "" &&
-        parseFloat(row.nba_ppg) >= 20.0);
+        row.nba_ppg >= 20);
 
     console.log(filteredData);
 
