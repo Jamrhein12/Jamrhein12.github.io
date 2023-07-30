@@ -19,7 +19,7 @@
 
 <div id="averages"></div>
 
-<svg id="chart1" width="1500" height="750" fill="lightgray"></svg>
+<svg id="chart1" width="2000" height="750"></svg>
 
 <script>
 
@@ -82,7 +82,7 @@ async function init() {
 
     const svgWidth = 1500;
     const svgHeight = 750;
-    const margin = { top: 50, right: 50, bottom: 100, left: 100 };
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
 
@@ -96,7 +96,7 @@ async function init() {
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-    .domain([0, d3.max(filteredData, d => d.NBA__3ptpct)])
+    .domain([0, 1])
     .range([chartHeight, 0]);
 
     const xAxis = d3.axisBottom(xScale);
