@@ -34,32 +34,27 @@ async function init() {
 
     console.log(filteredData);
 
-    // Setting percentage data to numbers and getting averages
-    
-    const avg_nba_3ptapg = d3.mean(filteredData, d => +d['NBA__3ptapg']);
+    // Getting league averages
+    const avg_nba_3ptapg = parseFloat(d3.mean(filteredData, d => +d['NBA__3ptapg']).toFixed(2));
     console.log(avg_nba_3ptapg);
-    const avg_nba_3ptpct = d3.mean(filteredData, d => +d['NBA__3ptpct']);
+    const avg_nba_3ptpct = parseFloat(d3.mean(filteredData, d => +d['NBA__3ptpct']).toFixed(2));
     console.log(avg_nba_3ptpct);
-    const avg_nba_3ptpg = d3.mean(filteredData, d => +d['NBA__3ptpg']);
+    const avg_nba_3ptpg = parseFloat(d3.mean(filteredData, d => +d['NBA__3ptpg']).toFixed(2));
     console.log(avg_nba_3ptpg);
-    const avg_nba_efgpct = d3.mean(filteredData, d => +d['NBA_efgpct']);
+    const avg_nba_efgpct = parseFloat(d3.mean(filteredData, d => +d['NBA_efgpct']).toFixed(2));
     console.log(avg_nba_efgpct);
-    const avg_nba_fg = d3.mean(filteredData, d => +d['NBA_fg%']);
+    const avg_nba_fg = parseFloat(d3.mean(filteredData, d => +d['NBA_fg%'].toFixed(2)));
     console.log(avg_nba_fg);
-    const avg_nba_fg_per_game = d3.mean(filteredData, d => +d['NBA_fg_per_game']);
+    const avg_nba_fg_per_game = parseFloat(d3.mean(filteredData, d => +d['NBA_fg_per_game']).toFixed(2));
     console.log(avg_nba_fg_per_game);
-    const avg_nba_fga_per_game = d3.mean(filteredData, d => +d['NBA_fga_per_game']);
+    const avg_nba_fga_per_game = parseFloat(d3.mean(filteredData, d => +d['NBA_fga_per_game']).toFixed(2));
     console.log(avg_nba_fga_per_game);
-    const avg_nba_ft = d3.mean(filteredData, d => +d['NBA_ft%']);
+    const avg_nba_ft = parseFloat(d3.mean(filteredData, d => +d['NBA_ft%']).toFixed(2));
     console.log(avg_nba_ft);
-    const avg_nba_ft_per_g = d3.mean(filteredData, d => +d['NBA_ft_per_g']);
+    const avg_nba_ft_per_g = parseFloat(d3.mean(filteredData, d => +d['NBA_ft_per_g']).toFixed(2));
     console.log(avg_nba_ft_per_g);
-    const avg_nba_fta_p_g = d3.mean(filteredData, d => +d['NBA_fta_p_g']);
+    const avg_nba_fta_p_g = parseFloat(d3.mean(filteredData, d => +d['NBA_fta_p_g']).toFixed(2));
     console.log(avg_nba_fta_p_g);
-    const avg_nba_g_played = d3.mean(filteredData, d => +d['NBA_g_played']);
-    console.log(avg_nba_g_played);
-    const avg_nba_ppg = d3.mean(filteredData, d => +d['NBA_ppg']);
-    console.log(avg_nba_ppg);
 
 
     d3.select('#datacontainer')
@@ -67,7 +62,7 @@ async function init() {
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Player Name: ' + d.name + ' Career PPG: ' + d.NBA_ppg; });
+        .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Name: ' + d.name + ' Career PPG: ' + d.NBA_ppg; });
 
     d3.select('#averages')
         .append('p')
