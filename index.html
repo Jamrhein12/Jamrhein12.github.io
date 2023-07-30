@@ -23,6 +23,8 @@ async function init() {
         row.college !== null && 
         row.college !== "");
 
+    console.log(filteredData);
+
     // Setting percentage data to numbers and getting averages
     /*
     const avg_nba_3ptapg = d3.mean(filteredData, d => +nba_3ptapg);
@@ -44,7 +46,7 @@ async function init() {
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg; });
+        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_3ptpct; });
 
 }
 
