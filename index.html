@@ -158,7 +158,7 @@ async function init() {
         .attr("y", d => yScale2(d))
         .attr("width", xScale2.bandwidth() / 2)
         .attr("height", d => chartHeight + margin.top - yScale2(d))
-        .attr("fill", (d, i) => ["green", "black"][i]);
+        .attr("fill", (d, i) => ["green", "purple"][i]);
 
 ////////////////////////////////////////////////
 // NBA / NCAA chart
@@ -203,7 +203,7 @@ async function init() {
         .attr("y", d => yScale3(d))
         .attr("width", xScale3.bandwidth() / 4)
         .attr("height", d => chartHeight + margin.top - yScale3(d))
-        .attr("fill", (d, i) => ["steelblue", "green", "orange", "black"][i]);
+        .attr("fill", (d, i) => ["steelblue", "green", "orange", "purple"][i]);
 
 }
 
