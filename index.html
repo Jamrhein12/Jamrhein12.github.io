@@ -21,8 +21,7 @@ async function init() {
     const filteredData = data.filter(row => 
         row.active_from >= 2000 && 
         row.college !== null && 
-        row.college !== "" &&
-        row.nba_ppg >= 20);
+        row.college !== "");
 
     // Setting percentage data to numbers and getting averages
     /*
