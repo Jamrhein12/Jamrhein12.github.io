@@ -8,6 +8,8 @@
 <p>Below are charts showing shooting percentage data of players in the NBA (National Basketball Association)
     and their respective shooting percentage data of when they played college basketball (NCAA)</p>
 
+<div id="datacontainer"></div>
+
 <script>
 
 async function init() {
@@ -42,7 +44,7 @@ async function init() {
     const avg_nba_ppg = d3.mean(filteredData, d => +nba_ppg);
 */
 
-    d3.select('body')
+    d3.select('#datacontainer')
         .selectAll('p')
         .data(filteredData)
         .enter()
