@@ -59,34 +59,7 @@ async function init() {
         row.college !== "" &&
         row.NBA_ppg >= 20.0);
 
-    const filteredAvgData = data.filter(row =>
-        row.active_from >= 2000 &&
-        row.active_to >= 2018 &&
-        row.NBA_g_played >= 100)
-
     console.log(filteredData);
-
-    // Getting league averages
-
-    // NBA averages
-    const avg_nba_3ptpct = parseFloat(d3.mean(filteredAvgData, d => +d['NBA__3ptpct']).toFixed(2));
-    console.log(avg_nba_3ptpct);
-    const avg_nba_fg = parseFloat(d3.mean(filteredAvgData, d => +d['NBA_fg%']).toFixed(2));
-    console.log(avg_nba_fg);
-
-    /*
-    d3.select('#datacontainer')
-        .selectAll('p')
-        .data(filteredData)
-        .enter()
-        .append('p')
-        .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Name: ' + d.name + ' Career PPG: ' + d.NBA_ppg; });
-    */
-    d3.select('#averages')
-        .append('p')
-        .html('Avg. NBA 3pt percentage: ' + avg_nba_3ptpct +
-              '<br>Avg. NBA FG percentage: ' + avg_nba_fg +
-              '<br><br><br>');
 
 // Global chart dimensions
 
@@ -222,7 +195,7 @@ async function init() {
         .attr("class", "group")
         .attr("transform", d => `translate(${xScale3(d.name)}, 0)`)
         .selectAll(".bar")
-        .data(d => [d['NBA__3ptpct'], d['NCAA_3ptpct'], d['NBA_fg%'], d['NCAA_fgpct']])
+        .data(d => [d['NBA__3ptpct'], d['NCAA__3ptpct'], d['NBA_fg%'], d['NCAA_fgpct']])
         .enter()
         .append("rect")
         .attr("class", "bar")
