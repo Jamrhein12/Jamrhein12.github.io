@@ -107,7 +107,7 @@ async function init() {
         .call(xAxis);
 
     svg.append("g")
-        .attr("transform", 'translate(0, ${margin.left}, 0)')
+        .attr("transform", 'translate(${margin.left}, 0)')
         .call(yAxis);
 
     svg.selectAll(".bar")
@@ -117,7 +117,7 @@ async function init() {
         .attr("class", "bar")
         .attr("x", d => xScale(d.name))
         .attr("y", d => yScale(d.NBA__3ptpct))
-        .attr("width", xScale.bandWidth())
+        .attr("width", xScale.bandwidth())
         .attr("height", d => chartHeight - yScale(d.NBA__3ptpct))
         .attr("fill", "steelblue");
 
