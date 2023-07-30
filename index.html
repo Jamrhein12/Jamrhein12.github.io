@@ -14,46 +14,62 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
-    const filteredData = data.filter(row => row.active_from >= 2000 && row.college !== null && row.college !== "");
+    // Filter data to...
+    // 1. Player played college basketball
+    // 2. Player started career in or after 2000
+    // 3. Player has a career nba ppg >= 20
+    const filteredData = data.filter(row => 
+        row.active_from >= 2000 && 
+        row.college !== null && 
+        row.college !== "" &&
+        row.nba_ppg >= 20.0);
+
+    // Setting percentage data to numbers and getting averages
+    const nba_3ptapg = filteredData.map(d => +d.nba_3ptapg);
+    const avg_nba_3ptapg = d3.mean(nba_3ptapg);
+
+    const nba_3ptpct = filteredData.map(d => +d.nba_3ptpct);
+    const avg_nba_3ptpct = d3.mean(nba_3ptpct);
+
+    const nba_3ptpg = filteredData.map(d => +d.nba_3ptpg);
+    const avg_nba_3ptpg = d3.mean(nba_3ptpg);
+
+    const nba_efgpct = filteredData.map(d => +d.nba_efgpct);
+    const avg_nba_efgpct = d3.mean(nba_efgpct);
+
+    const nba_fg = filteredData.map(d => +d.nba_fg);
+    const avg_nba_fg = d3.mean(nba_fg);
+
+    const nba_fg_per_game = filteredData.map(d => +d.nba_fg_per_game);
+    const avg_nba_fg_per_game = d3.mean(nba_fg_per_game);
+
+    const nba_fga_per_game = filteredData.map(d => +d.nba_fga_per_game);
+    const avg_nba_fga_per_game = d3.mean(nba_fga_per_game);
+
+    const nba_ft = filteredData.map(d => +d.nba_ft);
+    const avg_nba_ft = d3.mean(nba_ft);
+
+    const nba_ft_per_g = filteredData.map(d => +d.nba_ft_per_g);
+    const avg_nba_ft_per_g = d3.mean(nba_ft_per_g);
+
+    const nba_fta_p_g = filteredData.map(d => +d.nba_fta_p_g);
+    const avg_nba_fta_p_g = d3.mean(nba_fta_p_g);
+
+    const nba_g_played = filteredData.map(d => +d.nba_g_played);
+    const avg_nba_g_played = d3.mean(nba_g_played);
+
+    const nba_ppg = filteredData.map(d => +d.nba_ppg);
+    const avg_nba_ppg = d3.mean(nba_ppg);
+
 
     d3.select('body')
         .selectAll('p')
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Active From: ' + d.active_from; });
+        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg; });
 
 }
-
-
-
-/*
-var data = [4,8,15,16,23,42];
-
-var xs = d3.scaleBand().domain([0,1,2,3,4,5]).range([0,200]);
-var ys = d3.scaleLinear().domain([0,42]).range([200,0]);
-
-d3.select("svg")
-.append("g")
-.attr("transform","translate(50,50)")
-.selectAll("rect")
-.data(data)
-.enter().append("rect")
-.attr("x", function(d, i) {return xs(i)})
-.attr("y", function(d) {return ys(d)})
-.attr("width", xs.bandwidth)
-.attr("height", function(d, i) {return 200 - ys(d)});
-
-d3.select("svg")
-.append("g")
-.attr("transform","translate(50,50)")
-.call(d3.axisLeft(ys));
-
-d3.select("svg")
-.append("g")
-.attr("transform","translate(50,250)")
-.call(d3.axisBottom(xs));
-*/
 
 </script>
 </body>
