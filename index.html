@@ -14,26 +14,14 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
-    const namesToFilter = ["LeBron James",
-                           "James Harden",
-                           "Kyrie Irving",
-                           "Anthony Davis",
-                           "Stephen Curry",
-                           "Giannis Antetokounmpo",
-                           "Devin Booker",
-                           "Paul George",
-                           "Jayson Tatum",
-                           "Joel Embiid"
-                          ];
-
-    const filteredData = data.filter(row => namesToFilter.includes(row.name));
+    const filteredData = data.filter(row => row.active_from >= 2000);
 
     d3.select('body')
         .selectAll('p')
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college; });
+        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Active From: ' + d.active_from; });
 
 }
 
