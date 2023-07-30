@@ -14,9 +14,18 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
+    const namesToFilter = ["Stephen Curry",
+                           "LeBron James",
+                           "James Harden",
+                           "Kyrie Irving",
+                           "Anthony Davis"
+                          ];
+
+    const filteredData = data.filter(row => namesToFilter.includes(row.name));
+
     d3.select('body')
         .selectAll('p')
-        .data(data)
+        .data(filteredData)
         .enter()
         .append('p')
         .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college; });
