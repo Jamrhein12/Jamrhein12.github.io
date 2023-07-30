@@ -19,7 +19,7 @@
 
 <div id="averages"></div>
 
-<svg id="chart1" width="1500" height="750"></svg>
+<svg id="chart1" width="1500" height="750" fill="lightblue"></svg>
 
 <script>
 
@@ -99,20 +99,14 @@ async function init() {
     .domain([0, d3.max(filteredData, d => d.NBA__3ptpct)])
     .range([chartHeight, 0]);
 
-    const xAxis = d3.axisBottom(xScale)
-        .tickFormat(d => d)
-        .tickSize(10)
-        .tickPadding(5);
+    const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
 
     svg.append("g")
         .attr("transform", "translate(0, 1400)")
         .call(xAxis)
         .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "-.8em")
-        .attr("dy", ".15em")
-        .attr("transform", "rotate(-45)");
+        .style("font-size", "5px");
 
     svg.append("g")
         .attr("transform", "translate(50, 0)")
