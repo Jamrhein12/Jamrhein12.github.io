@@ -91,7 +91,7 @@ async function init() {
         .attr("height", svgHeight);
 
     const xScale = d3.scaleBand()
-        .domain(data.map(d => d.name))
+        .domain(filteredData.map(d => d.name))
         .range([margin.left, chartWidth + margin.left])
         .padding(0.1);
 
