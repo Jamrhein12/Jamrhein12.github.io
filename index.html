@@ -131,23 +131,40 @@ async function init() {
     const ncaa_button = document.getElementById("NCAA_button");
     const both_button = document.getElementById("both_button");
 
+    const header = document.getElementById("header");
+
     nba_button.addEventListener("click", function() {
         console.log("nba_button clicked");
+        header.textContent = "NBA Shooting Percentages";
+
+        svg.selectAll(".bar")
+            .data(d => [d['NBA__3ptpct'], d['NBA_fg%']])
+            .attr("y", d => yScale(d))
+            .attr("height", d => chartHeight + margin.top - yScale(d));
+
     });
 
     ncaa_button.addEventListener("click", function() {
         console.log("ncaa_button clicked");
+        header.textContent = "NCAA Shooting Percentages";
+
+        svg.selectAll(".bar")
+            .data(d => [d['NCAA__3ptpct'], d['NCAA_fgpct']])
+            .attr("y", d => yScale(d))
+            .attr("height", d => chartHeight + margin.top - yScale(d));
+
     });
 
     both_button.addEventListener("click", function() {
         console.log("both_button clicked");
+        header.textContent = "NBA/NCAA Shooting Percentages";
     })
 
 
 /////////////////////////////////////////////
 // NCAA chart
 /////////////////////////////////////////////
-
+/*
     svg1.selectAll(".group")
         .data(filteredData)
         .enter()
@@ -164,7 +181,7 @@ async function init() {
         .attr("width", xScale1.bandwidth() / 3)
         .attr("height", d => chartHeight + margin.top - yScale1(d))
         .attr("fill", (d, i) => ["steelblue", "orange", "green"][i]);
-
+*/
 }
 
 </script>
