@@ -14,7 +14,7 @@ async function init() {
 
     const data = await d3.csv('https://Jamrhein12.github.io/players.csv');
 
-    const filteredData = data.filter(row => row.active_from >= 2000);
+    const filteredData = data.filter(row => row.active_from >= 2000 && row.college !== null);
 
     d3.select('body')
         .selectAll('p')
