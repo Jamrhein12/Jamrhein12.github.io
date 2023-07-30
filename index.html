@@ -137,10 +137,19 @@ async function init() {
         console.log("nba_button clicked");
         header.textContent = "NBA Shooting Percentages";
 
-        svg.selectAll(".bar")
+        const groups_nba = svg.SelectAll(".group")
+            .data(filteredData, d => d.name);
+
+        groups_nba.attr("transform", d => `translate(${xScale(d.name)}, 0)`);
+
+        groups_nba.selectAll(".bar")
             .data(d => [d['NBA__3ptpct'], d['NBA_fg%']])
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
             .attr("y", d => yScale(d))
-            .attr("height", d => chartHeight + margin.top - yScale(d));
+            .attr("height", d => chartHeight - yScale(d))
+            .attr("fill", (d, i) => ["steelblue", "orange"][i]);
 
     });
 
@@ -148,10 +157,19 @@ async function init() {
         console.log("ncaa_button clicked");
         header.textContent = "NCAA Shooting Percentages";
 
-        svg.selectAll(".bar")
+        const groups_ncaa = svg.SelectAll(".group")
+            .data(filteredData, d => d.name);
+
+        groups_ncaa.attr("transform", d => `translate(${xScale(d.name)}, 0)`);
+
+        groups_ncaa.selectAll(".bar")
             .data(d => [d['NCAA__3ptpct'], d['NCAA_fgpct']])
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
             .attr("y", d => yScale(d))
-            .attr("height", d => chartHeight + margin.top - yScale(d));
+            .attr("height", d => chartHeight - yScale(d))
+            .attr("fill", (d, i) => ["green", "black"][i]);
 
     });
 
