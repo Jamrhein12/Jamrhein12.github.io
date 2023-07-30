@@ -115,7 +115,7 @@ async function init() {
         .enter()
         .append("g")
         .attr("class", "group")
-        .attr("transform", d => "translate(${xScale(d.name)}, 0)")
+        .attr("transform", d => `translate(${xScale(d.name)}, 0)`)
         .selectAll(".bar")
         .data(d => [d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%'], d['NBA_ft%']])
         .enter()
