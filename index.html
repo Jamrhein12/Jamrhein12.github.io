@@ -21,7 +21,8 @@ async function init() {
     const filteredData = data.filter(row => 
         row.active_from >= 2000 && 
         row.college !== null && 
-        row.college !== "");
+        row.college !== "" &&
+        parseFloat(row.nba_ppg) >= 20.0);
 
     console.log(filteredData);
 
@@ -46,7 +47,7 @@ async function init() {
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_3ptpct; });
+        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg.toString(); });
 
 }
 
