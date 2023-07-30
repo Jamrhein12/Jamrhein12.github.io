@@ -32,28 +32,33 @@ async function init() {
         row.college !== "" &&
         row.NBA_ppg >= 20.0);
 
+    const filteredAvgData = data.filter(row =>
+        row.active_from >= 2000 &&
+        row.active_to >= 2018 &&
+        row.NBA_g_played >= 100)
+
     console.log(filteredData);
 
     // Getting league averages
-    const avg_nba_3ptapg = parseFloat(d3.mean(data, d => +d['NBA__3ptapg']).toFixed(2));
+    const avg_nba_3ptapg = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA__3ptapg']).toFixed(2));
     console.log(avg_nba_3ptapg);
-    const avg_nba_3ptpct = parseFloat(d3.mean(data, d => +d['NBA__3ptpct']).toFixed(2));
+    const avg_nba_3ptpct = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA__3ptpct']).toFixed(2));
     console.log(avg_nba_3ptpct);
-    const avg_nba_3ptpg = parseFloat(d3.mean(data, d => +d['NBA__3ptpg']).toFixed(2));
+    const avg_nba_3ptpg = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA__3ptpg']).toFixed(2));
     console.log(avg_nba_3ptpg);
-    const avg_nba_efgpct = parseFloat(d3.mean(data, d => +d['NBA_efgpct']).toFixed(2));
+    const avg_nba_efgpct = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_efgpct']).toFixed(2));
     console.log(avg_nba_efgpct);
-    const avg_nba_fg = parseFloat(d3.mean(data, d => +d['NBA_fg%']).toFixed(2));
+    const avg_nba_fg = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_fg%']).toFixed(2));
     console.log(avg_nba_fg);
-    const avg_nba_fg_per_game = parseFloat(d3.mean(data, d => +d['NBA_fg_per_game']).toFixed(2));
+    const avg_nba_fg_per_game = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_fg_per_game']).toFixed(2));
     console.log(avg_nba_fg_per_game);
-    const avg_nba_fga_per_game = parseFloat(d3.mean(data, d => +d['NBA_fga_per_game']).toFixed(2));
+    const avg_nba_fga_per_game = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_fga_per_game']).toFixed(2));
     console.log(avg_nba_fga_per_game);
-    const avg_nba_ft = parseFloat(d3.mean(data, d => +d['NBA_ft%']).toFixed(2));
+    const avg_nba_ft = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_ft%']).toFixed(2));
     console.log(avg_nba_ft);
-    const avg_nba_ft_per_g = parseFloat(d3.mean(data, d => +d['NBA_ft_per_g']).toFixed(2));
+    const avg_nba_ft_per_g = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_ft_per_g']).toFixed(2));
     console.log(avg_nba_ft_per_g);
-    const avg_nba_fta_p_g = parseFloat(d3.mean(data, d => +d['NBA_fta_p_g']).toFixed(2));
+    const avg_nba_fta_p_g = parseFloat(d3.mean(filteredAvgdata, d => +d['NBA_fta_p_g']).toFixed(2));
     console.log(avg_nba_fta_p_g);
 
 
