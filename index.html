@@ -21,7 +21,7 @@ async function init() {
                            "Anthony Davis"
                           ];
 
-    const filteredData = data.filter(row => namesToFilter.includes(row.name));
+    const filteredData = data.filter(row => namesToFilter.some(name => name.trim().toLowerCase() === row.name.trim().toLowerCase()));
 
     d3.select('body')
         .selectAll('p')
