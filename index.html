@@ -46,7 +46,8 @@ async function init() {
         .data(filteredData)
         .enter()
         .append('p')
-        .html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg.toString(); });
+        .text(d => 'Name: ${d.name}, Career PPG: ${d.nba_ppg}');
+        //.html(function(d, i) { return 'Player Name: ' + d.name + ' College: ' + d.college + ' Career PPG: ' + d.nba_ppg; });
 
 }
 
