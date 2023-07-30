@@ -96,7 +96,7 @@ async function init() {
         .padding(0.1);
 
     const yScale = d3.scaleLinear()
-    .domain([0, 1])
+    .domain([0, d3.max(filteredData, d => Math.max(d['NBA__3ptpct'], d['NBA_efgpct'], d['NBA_fg%']))])
     .range([chartHeight, 0]);
 
     const xAxis = d3.axisBottom(xScale);
