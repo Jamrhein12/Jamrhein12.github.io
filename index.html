@@ -19,7 +19,9 @@
 
 <div id="averages"></div>
 
-<h1>NBA Shooting Percentages</h1>
+<h1 id="nba_header">NBA Shooting Percentages</h1>
+
+<button id="nba_to_ncaa_button">NCAA Shooting Percentages</button>
 
 <p>Blue = 3pt percentage<br>Orange = FG percentage</p>
 
@@ -27,7 +29,11 @@
 
 <br><br><br><br><br>
 
-<h1>NCAA Shooting Percentages</h1>
+<h1 id="ncaa_header">NCAA Shooting Percentages</h1>
+
+<button id="ncaa_to_nba_button">NBA Shooting Percentages</button>
+<br>
+<button id="ncaa_to_both_button">NBA/NCAA Shooting Percentages</button>
 
 <p>Green = 3pt percentage<br>Black = FG percentage</p>
 
@@ -35,7 +41,11 @@
 
 <br><br><br><br><br>
 
-<h1>NBA/NCAA Shooting Percentages</h1>
+<h1 id="both_header">NBA/NCAA Shooting Percentages</h1>
+
+<button id="both_to_nba_button">NBA Shooting Percentages</button>
+<br>
+<button id="both_to_ncaa_button">NCAA Shooting Percentages</button>
 
 <p>Blue = 3pt percentage (NBA)<br>Green = 3pt percentage (NCAA)
 <br>Orange = FG percentage (NBA)<br>Black = FG percentage (NCAA)
@@ -204,6 +214,23 @@ async function init() {
         .attr("width", xScale3.bandwidth() / 4)
         .attr("height", d => chartHeight + margin.top - yScale3(d))
         .attr("fill", (d, i) => ["steelblue", "green", "orange", "purple"][i]);
+
+// Button listeners
+
+    const nba_header = document.getElementById("nba_header");
+    const ncaa_header = document.getElementById("ncaa_header");
+    const both_header = document.getElementById("both_header");
+
+    const nba_to_ncaa = document.getElementById("nba_to_ncaa_button");
+
+    nba_to_ncaa.addEventListener("click", function nba_to_ncaa() {
+        ncaa_header.scrollIntoView({ behavior: "smooth"});
+    })
+
+    
+
+
+
 
 }
 
