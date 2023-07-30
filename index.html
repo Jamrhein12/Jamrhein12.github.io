@@ -19,7 +19,7 @@
 
 <div id="averages"></div>
 
-<svg id="chart1" width="800" height="400"></svg>
+<svg id="chart1" width="1500" height="750"></svg>
 
 <script>
 
@@ -80,9 +80,9 @@ async function init() {
               '<br>Avg. NBA FG percentage: ' + avg_nba_fg + 
               '<br>Avg. NBA FT percentage: ' + avg_nba_ft);
 
-    const svgWidth = 800;
-    const svgHeight = 400;
-    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+    const svgWidth = 1500;
+    const svgHeight = 750;
+    const margin = { top: 50, right: 50, bottom: 100, left: 100 };
     const chartWidth = svgWidth - margin.left - margin.right;
     const chartHeight = svgHeight - margin.top - margin.bottom;
 
@@ -99,15 +99,18 @@ async function init() {
     .domain([0, d3.max(filteredData, d => d.NBA__3ptpct)])
     .range([chartHeight, 0]);
 
-    const xAxis = d3.axisBottom(xScale);
+    const xAxis = d3.axisBottom(xScale)
+        .tickFormat(d => d)
+        .tickSize(10)
+        .tickPadding(5);
     const yAxis = d3.axisLeft(yScale);
 
     svg.append("g")
-        .attr("transform", "translate(40, 760)")
+        .attr("transform", "translate(100, 1400)")
         .call(xAxis);
 
     svg.append("g")
-        .attr("transform", "translate(40, 0)")
+        .attr("transform", "translate(50, 0)")
         .call(yAxis);
 
     svg.selectAll(".bar")
