@@ -36,11 +36,11 @@ async function init() {
 
     // Setting percentage data to numbers and getting averages
     
-    const avg_nba_3ptapg = d3.mean(filteredData, d => +d['NBA_3ptapg']);
+    const avg_nba_3ptapg = d3.mean(filteredData, d => +d['NBA__3ptapg']);
     console.log(avg_nba_3ptapg);
-    const avg_nba_3ptpct = d3.mean(filteredData, d => +d['NBA_3ptpct']);
+    const avg_nba_3ptpct = d3.mean(filteredData, d => +d['NBA__3ptpct']);
     console.log(avg_nba_3ptpct);
-    const avg_nba_3ptpg = d3.mean(filteredData, d => +d['NBA_3ptpg']);
+    const avg_nba_3ptpg = d3.mean(filteredData, d => +d['NBA__3ptpg']);
     console.log(avg_nba_3ptpg);
     const avg_nba_efgpct = d3.mean(filteredData, d => +d['NBA_efgpct']);
     console.log(avg_nba_efgpct);
@@ -70,9 +70,6 @@ async function init() {
         .html(function(d, i) { console.log("Index:", i, "Value:", d.name); return 'Player Name: ' + d.name + ' Career PPG: ' + d.NBA_ppg; });
 
     d3.select('#averages')
-        .selectAll('p')
-        .data(filteredData)
-        .enter()
         .append('p')
         .html('Avg. NBA 3pt attempts per game: ' + avg_nba_3ptapg +
               '<br>Avg. NBA 3pt percentage: ' + avg_nba_3ptpct +
