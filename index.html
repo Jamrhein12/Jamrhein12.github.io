@@ -97,13 +97,13 @@ async function init() {
 
     const yScale = d3.scaleLinear()
     .domain([0, d3.max(filteredData, d => d.NBA__3ptpct)])
-    .range([chartHeight + margin.top, margin.top]);
+    .range([chartHeight, 0]);
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
 
     svg.append("g")
-        .attr("transform", "translate(0, 760)")
+        .attr("transform", "translate(40, 760)")
         .call(xAxis);
 
     svg.append("g")
