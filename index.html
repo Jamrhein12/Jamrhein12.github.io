@@ -11,10 +11,6 @@
     or after the year 2000, and averaged 20 points per game or more in their NBA career.
 </p>
 
-<p>Average data for the NBA was taken from data from NBA players who played in the year 2018
-    (the most recent year of the data) and have played atleast 100 career games.
-</p>
-
 <div id="datacontainer"></div>
 
 <div id="averages"></div>
@@ -124,6 +120,18 @@ async function init() {
         .attr("height", d => chartHeight + margin.top - yScale1(d))
         .attr("fill", (d, i) => ["steelblue", "orange"][i]);
 
+    const annotated_nba_data = filteredData.filter(d => d.name === "Stephen Curry");
+
+    svg1.selectAll(".annotation")
+        .data(annotated_nba_data)
+        .enter()
+        .append("text")
+        .attr("class", "annotation")
+        .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
+        .attr("y", d => yScale1(d.NBA__3ptpct) - 5)
+        .attr("text-anchor", "middle")
+        .text("Stephen Curry has the highest 3 point percentage of the group with 43.6%");
+
 
 /////////////////////////////////////////////
 // NCAA chart
@@ -214,6 +222,7 @@ async function init() {
         .attr("width", xScale3.bandwidth() / 4)
         .attr("height", d => chartHeight + margin.top - yScale3(d))
         .attr("fill", (d, i) => ["steelblue", "green", "orange", "purple"][i]);
+
 
 // Button listeners
 
