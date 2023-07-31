@@ -131,9 +131,10 @@ async function init() {
         .append("rect")
         .attr("x", -30)
         .attr("y", -15)
-        .attr("width", 60)
+        .attr("width", 200)
         .attr("height", 30)
         .attr("fill", "lightgray")
+        .attr("opacity", 0.5)
         .append("text")
         .attr("text-anchor", "middle")
         .attr("alignment-baseline", "middle")
@@ -187,7 +188,7 @@ async function init() {
 
     const annotated_ncaa_data = filteredData.filter(d => d.name === "Kyrie Irving");
 
-    svg1.selectAll(".annotation")
+    svg2.selectAll(".annotation")
         .data(annotated_nba_data)
         .enter()
         .append("text")
@@ -244,7 +245,7 @@ async function init() {
 
     const annotated_both_data = filteredData.filter(d => d.name === "DeMarcus Cousins");
 
-    svg1.selectAll(".annotation")
+    svg3.selectAll(".annotation")
         .data(annotated_nba_data)
         .enter()
         .append("text")
