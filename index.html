@@ -125,12 +125,19 @@ async function init() {
     svg1.selectAll(".annotation")
         .data(annotated_nba_data)
         .enter()
-        .append("text")
+        .append("g")
         .attr("class", "annotation")
-        .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
-        .attr("y", d => yScale1(d.NBA__3ptpct) - 50)
+        .attr("transform", d => `translate(${xScale1(d.name) + xScale1.bandwidth() / 2}, ${yScale1(d.NBA__3ptpct) - 25})`)
+        .append("rect")
+        .attr("x", -30)
+        .attr("y", -15)
+        .attr("width", 60)
+        .attr("height", 30)
+        .attr("fill", "lightgray")
+        .append("text")
         .attr("text-anchor", "middle")
-        .text("Stephen Curry has the highest\n3 point percentage of the group\nwith 43.6%");
+        .attr("alignment-baseline", "middle")
+        .text("Stephen Curry has the highest 3 point percentage of the group with 43.6%");
 
 
 /////////////////////////////////////////////
@@ -178,6 +185,18 @@ async function init() {
         .attr("height", d => chartHeight + margin.top - yScale2(d))
         .attr("fill", (d, i) => ["green", "purple"][i]);
 
+    const annotated_ncaa_data = filteredData.filter(d => d.name === "Kyrie Irving");
+
+    svg1.selectAll(".annotation")
+        .data(annotated_nba_data)
+        .enter()
+        .append("text")
+        .attr("class", "annotation")
+        .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
+        .attr("y", d => yScale1(d.NCAA__3ptpct) - 25)
+        .attr("text-anchor", "middle")
+        .text("Kyrie Irving shot exceptionally well in college from 3pt and from the field");
+
 ////////////////////////////////////////////////
 // NBA / NCAA chart
 ///////////////////////////////////////////////
@@ -222,6 +241,18 @@ async function init() {
         .attr("width", xScale3.bandwidth() / 4)
         .attr("height", d => chartHeight + margin.top - yScale3(d))
         .attr("fill", (d, i) => ["steelblue", "green", "orange", "purple"][i]);
+
+    const annotated_both_data = filteredData.filter(d => d.name === "DeMarcus Cousins");
+
+    svg1.selectAll(".annotation")
+        .data(annotated_nba_data)
+        .enter()
+        .append("text")
+        .attr("class", "annotation")
+        .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
+        .attr("y", d => yScale1(d.NCAA__3ptpct) - 25)
+        .attr("text-anchor", "middle")
+        .text("DeMarcus Cousins improved his 3pt shooting significantly from college to the NBA");
 
 
 // Button listeners
