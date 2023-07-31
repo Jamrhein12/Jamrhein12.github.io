@@ -31,7 +31,7 @@
 <br><br>
 <button id="ncaa_to_both_button">NBA/NCAA Shooting Percentages</button>
 
-<p>Green = 3pt percentage<br>Black = FG percentage</p>
+<p>Green = 3pt percentage<br>Pink = FG percentage</p>
 
 <svg id="chart2" width="1500" height="400"></svg>
 
@@ -44,7 +44,7 @@
 <button id="both_to_ncaa_button">NCAA Shooting Percentages</button>
 
 <p>Blue = 3pt percentage (NBA)<br>Green = 3pt percentage (NCAA)
-<br>Orange = FG percentage (NBA)<br>Black = FG percentage (NCAA)
+<br>Orange = FG percentage (NBA)<br>Pink = FG percentage (NCAA)
 </p>
 
 <svg id="chart3" width="1500" height="400"></svg>
@@ -125,16 +125,6 @@ async function init() {
     svg1.selectAll(".annotation")
         .data(annotated_nba_data)
         .enter()
-        .append("g")
-        .attr("class", "annotation")
-        .attr("transform", d => `translate(${xScale1(d.name) + xScale1.bandwidth() / 2}, ${yScale1(d.NBA__3ptpct) - 25})`)
-        .append("rect")
-        .attr("x", -200)
-        .attr("y", -15)
-        .attr("width", 1000)
-        .attr("height", 30)
-        .attr("fill", "lightgray")
-        .attr("opacity", 0.75)
         .append("text")
         .attr("text-anchor", "middle")
         .attr("alignment-baseline", "middle")
@@ -184,7 +174,7 @@ async function init() {
         .attr("y", d => yScale2(d))
         .attr("width", xScale2.bandwidth() / 2)
         .attr("height", d => chartHeight + margin.top - yScale2(d))
-        .attr("fill", (d, i) => ["green", "purple"][i]);
+        .attr("fill", (d, i) => ["green", "#DB7093"][i]);
 
     const annotated_ncaa_data = filteredData.filter(d => d.name === "Kyrie Irving");
 
@@ -241,7 +231,7 @@ async function init() {
         .attr("y", d => yScale3(d))
         .attr("width", xScale3.bandwidth() / 4)
         .attr("height", d => chartHeight + margin.top - yScale3(d))
-        .attr("fill", (d, i) => ["steelblue", "green", "orange", "purple"][i]);
+        .attr("fill", (d, i) => ["steelblue", "green", "orange", "#DB7093"][i]);
 
     const annotated_both_data = filteredData.filter(d => d.name === "DeMarcus Cousins");
 
