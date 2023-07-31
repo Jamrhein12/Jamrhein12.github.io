@@ -126,8 +126,10 @@ async function init() {
         .data(annotated_nba_data)
         .enter()
         .append("text")
+        .attr("class", "annotation")
+        .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
+        .attr("y", d => yScale1(d.NBA__3ptpct) - 25)
         .attr("text-anchor", "middle")
-        .attr("alignment-baseline", "middle")
         .text("Stephen Curry has the highest 3 point percentage of the group with 43.6%");
 
 
