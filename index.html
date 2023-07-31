@@ -128,9 +128,9 @@ async function init() {
         .append("text")
         .attr("class", "annotation")
         .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
-        .attr("y", d => yScale1(d.NBA__3ptpct) - 20)
+        .attr("y", d => yScale1(d.NBA__3ptpct) - 50)
         .attr("text-anchor", "middle")
-        .html("Stephen Curry has the highest<br>3 point percentage of the group<br>with 43.6%");
+        .text("Stephen Curry has the highest\n3 point percentage of the group\nwith 43.6%");
 
 
 /////////////////////////////////////////////
