@@ -235,7 +235,7 @@ async function init() {
         .attr("height", d => chartHeight + margin.top - yScale3(d))
         .attr("fill", (d, i) => ["steelblue", "green", "orange", "#DB7093"][i]);
 
-    const annotated_both_data = filteredData.filter(d => d.name === "DeMarcus Cousins");
+    const annotated_both_data = filteredData.filter(d => d.name === "Anthony Davis");
 
     svg3.selectAll(".annotation")
         .data(annotated_both_data)
@@ -245,7 +245,7 @@ async function init() {
         .attr("x", d => xScale1(d.name) + xScale1.bandwidth() / 2)
         .attr("y", d => yScale1(d.NCAA__3ptpct) - 25)
         .attr("text-anchor", "middle")
-        .text("DeMarcus Cousins improved his 3pt shooting significantly from college to the NBA");
+        .text("Anthony Davis improved his 3pt shooting significantly from college to the NBA");
 
 
 // Button listeners
